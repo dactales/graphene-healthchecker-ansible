@@ -29,7 +29,7 @@
   become: true
   pip:
       name:
-          - graphene-healthchecker
+          - "{{ healthcheck__install_package }}"
           - pyyaml
       state: present
       virtualenv: "{{ healthcheck__install_env }}"
@@ -73,7 +73,7 @@
       enabled: true
       state: started
 
-- name: See if the healthchecker is urnning
+- name: See if the healthchecker is running
   wait_for:
       host: "localhost"
       port: "{{ healthcheck__listen_port }}"

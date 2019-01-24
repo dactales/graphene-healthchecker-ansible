@@ -17,6 +17,9 @@ Role Variables
 Dependencies
 ------------
 
+     # Pip module name and version number
+     healthcheck__install_package: "graphene-healthchecker>=0.1.3"
+
      # Linux user name that runs the healthchecks
      healthcheck__user: healthcheck
 
