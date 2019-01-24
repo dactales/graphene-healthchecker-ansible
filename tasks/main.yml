@@ -34,6 +34,7 @@
       state: present
       virtualenv: "{{ healthcheck__install_env }}"
       virtualenv_python: python3
+  notify: Restart healthchecker
 
 - name: Copy UWSGI config
   become: true
