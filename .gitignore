@@ -1,0 +1,4 @@
+.ropeproject/
+.pytest_cache/
+*.swp
+*__pycache__/

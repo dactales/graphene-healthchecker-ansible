@@ -1,0 +1,8 @@
+[uwsgi]
+app = graphene_health.views
+module = %(app)
+callable = app
+chmod-socket = 666
+vacuum = true
+die-on-term = true
+http = {{healthcheck__listen_host}}:{{healthcheck__listen_port}}

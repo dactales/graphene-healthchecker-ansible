@@ -1,0 +1,29 @@
+---
+allow_duplicates: true
+
+galaxy_info:
+  author: Fabian Schuh
+  description: Role to deploy Graphene health-checker
+  company: Blockchain Projects B.V.
+  license: MIT
+  min_ansible_version: 1.2
+  # Optionally specify the branch Galaxy will use when accessing the GitHub
+  # repo for this role. During role install, if no tags are available,
+  # Galaxy will use this branch. During import Galaxy will access files on
+  # this branch. If Travis integration is configured, only notifications for this
+  # branch will be accepted. Otherwise, in all cases, the repo's default branch
+  # (usually master) will be used.
+  # github_branch:
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 16.04
+        - 18.04
+
+  galaxy_tags:
+    - graphene
+    - blockchain
+    - health
+    - bitshares
+
+dependencies: []
