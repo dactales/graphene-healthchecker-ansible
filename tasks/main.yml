@@ -4,7 +4,7 @@
   become_user: root
   become: true
   user:
-      name: "{{healthcheck__user}}"
+      name: "{{ healthcheck__user }}"
 
 - name: Ensure we have python/pip and setup tools installed
   become_user: root
@@ -32,14 +32,14 @@
           - graphene-healthchecker
           - pyyaml
       state: present
-      virtualenv: "{{healthcheck__install_env}}"
+      virtualenv: "{{ healthcheck__install_env }}"
       virtualenv_python: python3
 
 - name: Copy UWSGI config
   become: true
   template:
       src: "uwsgi.ini.j2"
-      dest: "{{healthcheck__path_to_wsgi}}"
+      dest: "{{ healthcheck__path_to_wsgi }}"
       owner: root
       group: root
   notify: Restart healthchecker
@@ -47,28 +47,28 @@
 - name: Create install directiory
   become: true
   file:
-      path: "{{healthcheck__install_path}}"
+      path: "{{ healthcheck__install_path }}"
       state: directory
-      owner: "{{healthcheck__user}}"
+      owner: "{{ healthcheck__user }}"
 
 - name: Create configuration file
   become: true
   template:
       src: config.ini.j2
-      dest: "{{healthcheck__install_path}}/config.yaml"
+      dest: "{{ healthcheck__install_path }}/config.yaml"
   notify: Restart healthchecker
 
-- name: Setup systemd file for {{healthcheck__instance}}
+- name: Setup systemd file for {{ healthcheck__instance }}
   become: true
   template:
       src: "systemd-service.service.j2"
-      dest: "/etc/systemd/system/{{healthcheck__service}}"
+      dest: "/etc/systemd/system/{{ healthcheck__service }}"
   notify: Restart healthchecker
 
 - name: Ensure Healthchecker is running through Systemd
   become: true
   systemd:
-      name: "graphene-healthchecks-{{healthcheck__instance}}.service"
+      name: "graphene-healthchecks-{{ healthcheck__instance }}.service"
       daemon_reload: true
       enabled: true
       state: started
@@ -76,5 +76,5 @@
 - name: See if the healthchecker is urnning
   wait_for:
       host: "localhost"
-      port: "{{healthcheck__listen_port}}"
+      port: "{{ healthcheck__listen_port }}"
       timeout: 10

@@ -18,10 +18,10 @@
       # Variables
       healthcheck__user: healthcheck
       healthcheck__instance: healthcheck
-      healthcheck__service: graphene-healthchecks-{{healthcheck__instance}}.service
-      healthcheck__install_path: /home/{{healthcheck__user}}/healthcheck_{{healthcheck__instance}}/
-      healthcheck__install_env: /home/{{healthcheck__user}}/healthcheck_{{healthcheck__instance}}/env
-      healthcheck__path_to_wsgi: /home/{{healthcheck__user}}/healthcheck_{{healthcheck__instance}}/uwsg.ini
+      healthcheck__service: "graphene-healthchecks-{{ healthcheck__instance }}.service"
+      healthcheck__install_path: "/home/{{ healthcheck__user }}/healthcheck_{{ healthcheck__instance }}/"
+      healthcheck__install_env: "/home/{{ healthcheck__user }}/healthcheck_{{ healthcheck__instance }}/env"
+      healthcheck__path_to_wsgi: "/home/{{ healthcheck__user }}/healthcheck_{{ healthcheck__instance }}/uwsg.ini"
       healthcheck__listen_host: 0.0.0.0
       healthcheck__listen_port: 8080
       healthcheck__witness_url: https://node.bitshares.eu
