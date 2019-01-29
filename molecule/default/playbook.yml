@@ -14,7 +14,7 @@
     - name: "setup"
       setup:
   roles:
-    - role: graphene-healthchecker
+    - role: graphene-healthchecker-ansible
       # Variables
       healthcheck__user: healthcheck
       healthcheck__instance: healthcheck

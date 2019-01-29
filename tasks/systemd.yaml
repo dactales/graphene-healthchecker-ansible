@@ -1,0 +1,21 @@
+---
+- name: Setup systemd file for {{ healthcheck__instance }}
+  become: true
+  template:
+      src: "systemd-service.service.j2"
+      dest: "/etc/systemd/system/{{ healthcheck__service }}"
+  notify: Restart healthchecker
+
+- name: Ensure Healthchecker is running through Systemd
+  become: true
+  systemd:
+      name: "graphene-healthchecks-{{ healthcheck__instance }}.service"
+      daemon_reload: true
+      enabled: true
+      state: started
+
+- name: See if the healthchecker is running
+  wait_for:
+      host: "localhost"
+      port: "{{ healthcheck__listen_port }}"
+      timeout: 10

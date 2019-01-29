@@ -1,0 +1,36 @@
+---
+- name: "Add healthchecker user"
+  become_user: root
+  become: true
+  user:
+      name: "{{ healthcheck__user }}"
+
+- name: Ensure we have python/pip and setup tools installed
+  become_user: root
+  become: true
+  package:
+      name:
+          - python3
+          - python3-pip
+          - python3-setuptools
+          - python-pip
+          - python-setuptools
+
+- name: Install virtualenv
+  become_user: root
+  become: true
+  pip:
+      name:
+          - virtualenv
+
+- name: Install requirements using pip
+  become_user: root
+  become: true
+  pip:
+      name:
+          - "{{ healthcheck__install_package }}"
+          - pyyaml
+      state: present
+      virtualenv: "{{ healthcheck__install_env }}"
+      virtualenv_python: python3
+  notify: Restart healthchecker

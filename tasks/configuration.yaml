@@ -1,0 +1,23 @@
+---
+- name: Copy UWSGI config
+  become: true
+  template:
+      src: "uwsgi.ini.j2"
+      dest: "{{ healthcheck__path_to_wsgi }}"
+      owner: root
+      group: root
+  notify: Restart healthchecker
+
+- name: Create install directiory
+  become: true
+  file:
+      path: "{{ healthcheck__install_path }}"
+      state: directory
+      owner: "{{ healthcheck__user }}"
+
+- name: Create configuration file
+  become: true
+  template:
+      src: config.ini.j2
+      dest: "{{ healthcheck__install_path }}/config.yaml"
+  notify: Restart healthchecker
