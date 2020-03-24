@@ -34,3 +34,14 @@
       virtualenv: "{{ healthcheck__install_env }}"
       virtualenv_python: python3
   notify: Restart healthchecker
+
+- name: Pin werkzeug
+  become_user: root
+  become: true
+  pip:
+      name:
+          - "werkzeug==0.16.1"
+      state: present
+      virtualenv: "{{ healthcheck__install_env }}"
+      virtualenv_python: python3
+  notify: Restart healthchecker
