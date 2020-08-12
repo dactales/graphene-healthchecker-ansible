@@ -4,4 +4,6 @@
   service:
       name: graphene-healthchecks-{{healthcheck__instance}}.service
       state: restarted
-  when: ansible_virtualization_type != "docker"
+  when:
+    - ansible_virtualization_type is defined
+    - ansible_virtualization_type != "docker"
