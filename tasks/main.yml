@@ -4,6 +4,4 @@
 - import_tasks: configuration.yaml
 
 - import_tasks: systemd.yaml
-  when:
-    - ansible_virtualization_type is defined
-    - ansible_virtualization_type != "docker"
+  when: not (ansible_virtualization_type is defined and ansible_virtualization_type == "docker")
