@@ -4,8 +4,9 @@
   template:
       src: "uwsgi.ini.j2"
       dest: "{{ healthcheck__path_to_wsgi }}"
-      owner: root
-      group: root
+      owner: "{{healthcheck__user}}"
+      group: "{{healthcheck__user}}"
+      mode: a+r
   notify: Restart healthchecker
 
 - name: Create install directiory
@@ -20,4 +21,7 @@
   template:
       src: config.ini.j2
       dest: "{{ healthcheck__install_path }}/config.yaml"
+      owner: "{{healthcheck__user}}"
+      group: "{{healthcheck__user}}"
+      mode: a+r
   notify: Restart healthchecker
