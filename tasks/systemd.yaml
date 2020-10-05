@@ -16,6 +16,6 @@
 
 - name: See if the healthchecker is running
   wait_for:
-      host: "localhost"
+      host: "{{healthcheck__listen_host}}"
       port: "{{ healthcheck__listen_port }}"
       timeout: 10
